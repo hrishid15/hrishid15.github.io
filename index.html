@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hrishikesh deshpande</title>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,873 +16,274 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: #d6d2ca;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
+            font-family: 'Crimson Text', serif;
+            background-color: #f5f3ed;
+            color: #2a2a2a;
+            line-height: 1.7;
         }
 
-        .terminal-window {
-            background: #d6d2ca;
-            min-height: 100vh;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
-        .terminal-content {
-            padding: 40px 50px;
-            background: #d6d2ca;
-            color: #333;
-            line-height: 1.4;
+        /* Header Section */
+        header {
+            text-align: left;
+            padding: 60px 0 0 0;
         }
 
-        .header-info {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            margin-bottom: 30px;
-            font-size: 15px;
-            border-bottom: 1px solid #9f9f9f;
-            padding-bottom: 20px;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        .info-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: #9f9f9f;
-        }
-
-        .info-label {
-            color: #666;
-            margin-bottom: 2px;
-        }
-
-        .info-value {
-            color: #333;
-            font-weight: bold;
-        }
-
-        .profile-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin: 40px 0;
-            /* padding-bottom: 40px; */
-            /* border-bottom: 1px solid #9f9f9f; */
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: #999;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 12px;
-            overflow: hidden;
-        }
-
-        .profile-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 200px;
-        }
-
-        .profile-content h1 {
-            font-size: 60px;
-            font-weight: normal;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .profile-content .subtitle {
-            color: #666;
-            font-size: 20px;
-        }
-
-        .section {
-            margin: 40px 0;
-            border-top: 1px solid #9f9f9f;
-            padding-top: 40px;
-        }
-
-        .section-title {
-            color: #666;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .about-text {
-            max-width: 75%;
-            line-height: 1.6;
-            color: #333;
-            font-size: 17px;
-            font-weight: 500;
-        }
-
-        .projects-container {
-            margin-top: 30px;
-        }
-
-        .project-category {
-            margin-bottom: 50px;
-        }
-
-        .category-title {
-            color: #333;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .category-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #9f9f9f;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .project-card {
-            background: #faf9f7;
-            border: 1px solid #9f9f9f;
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-color: #999;
-        }
-
-        .project-header {
-            margin-bottom: 15px;
-        }
-
-        .project-name {
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
+        h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -1px;
             margin-bottom: 5px;
         }
 
-        .project-tech {
+        .subtitle {
+            font-size: 1.2rem;
             color: #666;
-            font-size: 12px;
             font-style: italic;
         }
 
-        .project-description {
-            color: #333;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            font-size: 14px;
-            flex-grow: 1;
+        /* Navigation Bar */
+        nav {
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+            margin: 40px 0;
         }
 
-        .project-links {
+        nav ul {
+            list-style: none;
             display: flex;
-            gap: 15px;
-            margin-top: auto;
+            justify-content: center;
+            gap: 50px;
         }
 
-        .project-link {
-            color: #333;
-            font-size: 12px;
+        nav a {
+            color: #2a2a2a;
             text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
         }
 
-        .project-link:hover {
-            background: #f0f0f0;
-            text-decoration: none;
+        nav a:hover {
+            color: #999;
         }
 
-        .modal {
+        nav a.active {
+            color: #2a2a2a;
+            font-weight: 600;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #2a2a2a;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            padding: 0 0 30px 0;
+        }
+
+        .page {
             display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
         }
 
-        .modal-content {
-            background-color: #faf9f7;
-            padding: 30px;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 70%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .page.active {
+            display: block;
         }
 
-        .close {
-            color: #666;
-            float: right;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
+        /* Home Page */
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .close:hover {
-            color: #333;
-        }
-
-        .modal h3 {
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 20px;
-        }
-
-        .modal-tech {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 20px;
-            padding: 0 15px;
-        }
-
-        .modal-description p {
-            margin-bottom: 20px;
-        }
-        
-        .modal-description ul {
-            padding-left: 20px;
-            list-style-type: '↣ ';
+        .about-section h2 {
+            font-size: 2rem;
+            font-weight: 600;
             margin-bottom: 30px;
-        }
-
-        .modal-description li {
-            position: relative;
-        }
-
-        .modal-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .skill-item {
-            background: #fff;
-            padding: 10px 15px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
             text-align: center;
-            transition: all 0.2s ease;
         }
 
-        .skill-item:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
+        .about-section p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
         }
 
-        .coursework-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .course-item {
-            background: #faf9f7;
-            padding: 12px 18px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            text-align: center;
-            transition: all 0.2s ease;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 60px; /* Optional: ensures consistent height */
-        }
-
-        .course-item:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
-        }
-
-        .floating-theme-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #faf9f7;
-            border: 2px solid #9f9f9f;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .floating-theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .floating-theme-toggle {
-            background: #2a2a2a;
-            border-color: #444;
-            color: #d0d0d0;
-        }
-
-        body.dark-mode {
-            background: #1a1a1a;
-        }
-
-        body.dark-mode .terminal-window {
-            background: #1a1a1a;
-        }
-
-        body.dark-mode .terminal-content {
-            background: #1a1a1a;
-            color: #d0d0d0;
-        }
-
-        body.dark-mode .info-label,
-        body.dark-mode .profile-content .subtitle,
-        body.dark-mode .section-title,
-        body.dark-mode .project-tech,
-        body.dark-mode .modal-tech {
-            color: #888;
-        }
-
-        body.dark-mode .modal h3 {
-            color: #d0d0d0;
-        }
-
-        body.dark-mode .info-value,
-        body.dark-mode .profile-content h1,
-        body.dark-mode .about-text,
-        body.dark-mode .project-name,
-        body.dark-mode .project-description,
-        body.dark-mode .modal-description {
-            color: #d0d0d0;
-        }
-
-        body.dark-mode .info-item:not(:last-child)::after,
-        body.dark-mode .header-info,
-        body.dark-mode .profile-section,
-        body.dark-mode .category-title::after,
-        body.dark-mode .project-card,
-        body.dark-mode .skill-item,
-        body.dark-mode .course-item,
-        body.dark-mode .modal-content {
-            border-color: #444;
-        }
-
-        body.dark-mode .project-card,
-        body.dark-mode .skill-item,
-        body.dark-mode .course-item,
-        body.dark-mode .modal-content {
-            background: #2a2a2a;
-        }
-
-        body.dark-mode .project-link {
-            color: #d0d0d0;
-            border-color: #444;
-        }
-
-        body.dark-mode .project-link:hover,
-        body.dark-mode .skill-item:hover,
-        body.dark-mode .course-item:hover {
-            background: #333;
-        }
-
-        body.dark-mode a {
-            color: #d0d0d0;
-        }
-
-        body.dark-mode a:hover {
-            color: #fff;
-        }
-
-        body.dark-mode .category-title {
-            color: #d0d0d0;
-        }
-
-        a {
-            color: #333;
+        .about-section a {
+            color: inherit;
             text-decoration: none;
+            transition: text-decoration 0.2s ease;
         }
 
-        a:hover {
+        .about-section a:hover,
+        .about-section a:focus {
             text-decoration: underline;
         }
 
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .social-links a {
+            color: #2a2a2a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            color: #666;
+        }
+
+        .social-links i {
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover i {
+            color: #555;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-info {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            h1 {
+                font-size: 2.8rem;
             }
-            
-            .info-item {
-                padding: 15px 0;
-                border-bottom: 1px solid #bbb;
+
+            .subtitle {
+                font-size: 1.2rem;
             }
-            
-            .info-item:not(:last-child)::after {
-                display: none;
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 25px;
             }
-            
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
+
+            nav a {
+                font-size: 1.1rem;
             }
-            
-            .profile-content h1 {
-                font-size: 36px;
+
+            .about-section h2 {
+                font-size: 2rem;
             }
-            
-            .experience-header {
-                flex-direction: column;
-                gap: 10px;
+
+            .about-section p {
+                font-size: 1.1rem;
+                text-align: left;
             }
         }
     </style>
 </head>
 <body>
-    <div class="terminal-window">        
-        <div class="terminal-content">
-            <div class="header-info">
-                <div class="info-item">
-                    <div class="info-label">// resume</div>
-                    <div class="info-value"><a href="assets/files/hrishikesh_deshpande.pdf" target="_blank">hrishikesh_deshpande.pdf</a></div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">// contact</div>
-                    <div class="info-value"><a href="mailto:your.email@gmail.com">hrishikesh.desh15@gmail.com</a></div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">// github</div>
-                    <div class="info-value"><a href="https://github.com/hrishid15" target="_blank">https://github.com/hrishid15</a></div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">// location</div>
-                    <div class="info-value">Your City, State 12:34:56 PM</div>
-                </div>
-            </div>
+    <div class="container">
+        <header>
+            <h1>Hrishikesh Deshpande</h1>
+            <p class="subtitle">Computer Engineering • University of Illinois Urbana-Champaign</p>
+        </header>
 
-            <div class="profile-section">
-                <div class="profile-image">
-                    <img src="assets/images/pfp.jpg" alt="Hrishikesh Deshpande" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                </div>
-                <div class="profile-content">
-                    <h1>Hrishikesh Deshpande</h1>
-                    <div class="subtitle">// software developer</div>
-                </div>
-            </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="coursework.html" class="nav-link">Coursework</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+            </ul>
+        </nav>
 
-            <div class="section">
-                <div class="section-title">// about me</div>
-                <div class="about-text">
-                    I am an incoming third-year undergraduate at the <b>University of Illinois Urbana-Champaign</b>,
-                    majoring in <b>Computer Engineering</b> with experience in systems programming, 
-                    machine learning, and mobile app development. I'm currently seeking internship opportunities 
-                    in AI/ML, systems engineering, and fintech, as I'm passionate about building scalable solutions 
-                    that range from operating systems to intelligent trading algorithms. I enjoy tackling complex 
-                    technical challenges and creating robust systems that can make a real-world impact.
-                </div>
-            </div>
-
-            <div class="section">
-    <div class="section-title">// projects</div>
-    
-        <div class="projects-container">
-            <div class="project-category">
-                <h3 class="category-title">In Progress</h3>
-                <div class="projects-grid">
-                    <div class="project-card" onclick="openModal('modal1', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">Real-time Recommendation Engine</h4>
-                            <div class="project-tech">Python • Node.js • MongoDB • Hybrid ML</div>
-                        </div>
-                        <p class="project-description">
-                            Real-time recommendation system with hybrid ML algorithms, intelligent caching, and sub-100ms response times.
+        <main>
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <div class="home-content">
+                    <section class="about-section">
+                        <h2>About Me</h2>
+                        <p>
+                            I am a student at the <a href="https://ece.illinois.edu/">University of Illinois Urbana-Champaign</a>,
+                            pursuing a degree in Computer Engineering. My research interests lie
+                            at the intersection of autonomous systems, machine learning, computer vision,
+                            and system-level optimization across hardware and software.
                         </p>
-                        <div class="project-links">
-                            <a href="https://github.com/hrishid15/real-time-recommendation-engine" target="_blank" class="project-link" onclick="event.stopPropagation()">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div id="modal1" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal1')">&times;</span>
-                            <h3>Real-time Recommendation Engine</h3>
-                            <div class="modal-tech">Python, Hybrid ML Algorithms, Node.js, MongoDB</div>
-                            <div class="modal-description">
-                                <p>A real-time recommendation system featuring hybrid machine learning algorithms and intelligent caching, achieving sub-100ms response times.</p>
-                                    
-                                    <h4>Key Features</h4>
-                                    <ul>
-                                        <li>Hybrid ML Algorithms: Combines collaborative filtering and content-based filtering for optimal recommendations</li>
-                                        <li>Real-time Learning: Updates user preferences instantly from interactions and ratings</li>
-                                        <li>Lightning-fast Performance: Sub-100ms response times using intelligent multi-layer caching</li>
-                                        <li>Interactive Interface: Command-line shell for easy testing and demonstration</li>
-                                        <li>REST API: HTTP endpoints for integration with external applications</li>
-                                        <li>Adaptive Strategy: Automatically chooses best algorithm based on available data</li>
-                                        <li>Performance Monitoring: Real-time cache statistics and response time tracking</li>
-                                    </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="https://github.com/hrishid15/real-time-recommendation-engine" target="_blank" class="project-link">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
+                        <p>
+                            Outside of academics, I enjoy playing tennis, watching movies and TV shows, and working on fun coding projects. 
+                            I've also recently gotten into bouldering and keeping up with F1. You can expect mini-projects, random ideas, 
+                            or whatever else I feel like sharing on my <u><a href="blog.html">blog</a></u>. 
+                        </p>
+                    </section>
                 </div>
             </div>
+        </main>
 
-            <div class="project-category">
-                <h3 class="category-title">Completed</h3>
-                <div class="projects-grid">
-                    <div class="project-card" onclick="openModal('modal2', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">Distributed Key-Value Store</h4>
-                            <div class="project-tech">Python • REST APIs • Distributed Systems</div>
-                        </div>
-                        <p class="project-description">
-                            Distributed key-value database with consistent hashing, configurable replication, and multiple consistency levels.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/hrishid15/distributed-key-value-store" target="_blank" class="project-link" onclick="event.stopPropagation()">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div id="modal2" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal2')">&times;</span>
-                            <h3>Distributed Key-Value Store</h3>
-                            <div class="modal-tech">Python, REST APIs, Distributed Systems, HTTP</div>
-                            <div class="modal-description">
-                                <p>Distributed key-value database with consistent hashing, configurable replication, and multiple consistency levels.</p>
-                                    
-                                    <h4>Key Features</h4>
-                                    <ul>
-                                        <li>Consistent Hashing: Automatic data distribution across nodes with minimal data movement when nodes join/leave</li>
-                                        <li>Configurable Replication: Choose replication factor and consistency levels (one, quorum, all)</li>
-                                        <li>Fault Tolerance: Data survives node failures through intelligent replication</li>
-                                        <li>HTTP REST API: Simple HTTP interface for integration with any application</li>
-                                        <li>Interactive Shell: User-friendly command-line interface for database operations</li>
-                                        <li>Real-time Cluster Management: Dynamic node joining and cluster state synchronization</li>
-                                    </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="https://github.com/hrishid15/distributed-key-value-store" target="_blank" class="project-link">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card" onclick="openModal('modal3', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">Swaram</h4>
-                            <div class="project-tech">Flutter • Dart • iOS • Firebase</div>
-                        </div>
-                        <p class="project-description">
-                            Cross-platform Flutter mobile app for Indian classical music notation with custom keyboards for optimized music notation input.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://apps.apple.com/us/app/swaram/id6639622213" target="_blank" class="project-link" onclick="event.stopPropagation()">App Store</a>
-                        </div>
-                    </div>
-
-                    <div id="modal3" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal3')">&times;</span>
-                            <h3>Swaram - Indian Classical Music App</h3>
-                            <div class="modal-tech">Flutter, Dart, iOS, Google Firebase, XCode</div>
-                            <div class="modal-description">
-                                <p>Cross-platform Flutter mobile app for Indian classical music notation with custom keyboards for optimized music input.</p>
-                                
-                                <h4>Key Features</h4>
-                                <ul>
-                                    <li>Cross-platform mobile app using Flutter/Dart, available on both iOS and Android with 100+ downloads across North America, Europe, and Asia</li>
-                                    <li>Custom keyboards with optimized layouts, improving the efficiency of complex music notation input by 40% compared to conventional input methods</li>
-                                    <li>Firebase integration for real-time data synchronization and secure cloud storage, reducing data inconsistencies by 30%</li>
-                                    <li>Growing user base of 50+ active users with regular updates based on user feedback to enhance satisfaction and engagement</li>
-                                </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="https://apps.apple.com/us/app/swaram/id6639622213" target="_blank" class="project-link">App Store</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" onclick="openModal('modal4', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">Stock Analysis Bot</h4>
-                            <div class="project-tech">Python • Jupyter Notebooks • ML • BERT</div>
-                        </div>
-                        <p class="project-description">
-                            Python-based stock prediction bot using LSTM models and BERT sentiment analysis, combining historical data with real-time news scraping for enhanced forecasting accuracy.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/hrishid15/StockAnalysis" target="_blank" class="project-link" onclick="event.stopPropagation()">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div id="modal4" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal4')">&times;</span>
-                            <h3>Stock Market Prediction Bot</h3>
-                            <div class="modal-tech">Python, Jupyter Notebooks, Machine Learning, LSTM, Transformers (BERT)</div>
-                            <div class="modal-description">
-                                <p>Python-based stock prediction bot using LSTM models and BERT sentiment analysis, combining historical data with real-time news scraping for enhanced forecasting accuracy.</p>
-                                
-                                <h4>Key Features</h4>
-                                <ul>
-                                    <li>Stock prediction using LSTM models trained on 5+ years of historical market data from the yFinance API</li>
-                                    <li>Web scraping pipeline with BeautifulSoup to extract financial news and earnings reports from major outlets for real-time data ingestion</li>
-                                    <li>BERT-based sentiment analysis using Hugging Face Transformers to analyze news contextually, improving classification accuracy over traditional NLP approaches</li>
-                                    <li>Feature extraction pipeline embedding sentiment scores into the LSTM model, leading to 20% improvement in accuracy over price-only models</li>
-                                    <li>Deployed for personal trading, achieving 8.5% portfolio return over three months through sentiment-informed decision-making</li>
-                                </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="https://github.com/hrishid15/StockAnalysis" target="_blank" class="project-link">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" onclick="openModal('modal5', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">RISC-V Operating System</h4>
-                            <div class="project-tech">C • RISC-V Assembly • GDB • Linux</div>
-                        </div>
-                        <p class="project-description">
-                            Unix-style operating system kernel built from scratch in C and RISC-V assembly, featuring virtual memory management, multithreading, custom filesystem, and user-mode shell.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/hrishid15/risc-v-operating-system" target="_blank" class="project-link" onclick="event.stopPropagation()">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div id="modal5" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal5')">&times;</span>
-                            <h3>RISC-V Operating System</h3>
-                            <div class="modal-tech">C, RISC-V Assembly, GDB, Linux, QEMU</div>
-                            <div class="modal-description">
-                                <p>Unix-style operating system kernel built from scratch in C and RISC-V assembly, featuring virtual memory management, multithreading, custom filesystem, and user-mode shell.</p>
-                                
-                                <h4>Key Features</h4>
-                                <ul>
-                                    <li>Unix-style kernel supporting ELF loading, dynamic user stack construction, argument passing, and seamless supervisor/user mode transitions</li>
-                                    <li>VirtIO block device driver with descriptor-based I/O, interrupt-driven completions, and reusable queues with reset and locking logic for concurrency</li>
-                                    <li>Virtual memory management with Sv39 page tables, enabling per-process memory isolation, page-level protection, and user/kernel memory separation</li>
-                                    <li>Preemptive multithreading system with thread creation/joining, stack allocation, context switching, and safe trapframe management</li>
-                                    <li>Custom writable filesystem supporting file operations, hierarchical directories, bitmap-based block allocation, and page-cache dirty tracking for disk persistence</li>
-                                    <li>Minimal user-mode shell with argument parsing, file interaction, and concurrent process support via custom syscalls and inter-process pipes</li>
-                                </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="https://github.com/hrishid15/risc-v-operating-system" target="_blank" class="project-link">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" onclick="openModal('modal6', event)">
-                        <div class="project-header">
-                            <h4 class="project-name">Pneumonia Detection Model</h4>
-                            <div class="project-tech">Python • Machine Learning • TensorFlow</div>
-                        </div>
-                        <p class="project-description">
-                            Pneumonia detection model using convolutional neural networks and TensorFlow to analyze chest X-ray images for automated medical diagnosis.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/hrishid15/PneumoniaDetectionModel" target="_blank" class="project-link" onclick="event.stopPropagation()">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div id="modal6" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal('modal6')">&times;</span>
-                            <h3>Pneumonia Detection Model</h3>
-                            <div class="modal-tech">Python, TensorFlow, Convolutional Neural Networks</div>
-                            <div class="modal-description">
-                                <p>Pneumonia detection model using convolutional neural networks and TensorFlow to analyze chest X-ray images for automated medical diagnosis.</p>
-                                
-                                <h4>Key Features</h4>
-                                <ul>
-                                    <li>Convolutional Neural Network architecture optimized for medical image classification</li>
-                                    <li>Trained on large dataset of chest X-ray images with pneumonia and normal cases</li>
-                                    <li>Image preprocessing pipeline including normalization, augmentation, and noise reduction</li>
-                                    <li>Transfer learning techniques leveraging pre-trained models for improved accuracy</li>
-                                    <li>Model evaluation with precision, recall, and F1-score metrics for medical reliability</li>
-                                    <li>Visualization tools for highlighting affected regions in X-ray images</li>
-                                </ul>
-                            </div>
-                            <div class="modal-links">
-                                <a href="#" class="project-link">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <footer>
+            <div class="social-links">
+                <u><a href="mailto:hd11@illinois.edu" aria-label="Email">
+                    hd11@illinois.edu
+                </a></u>
+                <p>•</p>
+                <a href="https://github.com/hrishid15" target="_blank" aria-label="GitHub">
+                    <i class="fa-brands fa-github fa-lg"></i>
+                </a>
+                <a href="https://linkedin.com/in/hrishikesh-desh" target="_blank" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin fa-lg"></i>
+                </a>
+                <p>•</p>
+                <u><a href="assets/files/hrishikesh_deshpande.pdf" target="_blank">Resume</a></u>
             </div>
-        </div>
-    </div>
-
-        <div class="section">
-            <div class="section-title">// relevant coursework</div>
-            <div class="coursework-grid">
-                <div class="course-item">Operating Systems Design</div>
-                <div class="course-item">Computer Architecture</div>
-                <div class="course-item">Applied Parallel Programming</div>
-                <div class="course-item">Machine Learning Applications</div>
-                <div class="course-item">Algorithms & Models of Computation</div>
-                <div class="course-item">Data Structures</div>
-                <div class="course-item">Networks & Distributed Systems</div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">// skills</div>
-                <div class="skills-grid">
-                    <div class="skill-item">Python</div>
-                    <div class="skill-item">C/C++</div>
-                    <div class="skill-item">Java</div>
-                    <div class="skill-item">JavaScript</div>
-                    <div class="skill-item">Dart/Flutter</div>
-                    <div class="skill-item">React</div>
-                    <div class="skill-item">Git</div>
-                    <div class="skill-item">Firebase</div>
-                    <div class="skill-item">CUDA</div>
-                    <div class="skill-item">TensorFlow</div>
-                    <div class="skill-item">Arduino</div>
-                    <div class="skill-item">Verilog</div>
-                </div>
-            </div>
-        </div>
-
-        <button id="theme-toggle" class="floating-theme-toggle">🌙</button>
+            <p>© 2025 Hrishikesh Deshpande</p>
+        </footer>
     </div>
 
     <script>
-        // Update time in real-time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                timeZone: 'America/Los_Angeles',
-                hour12: true,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            
-            const locationElement = document.querySelector('.header-info .info-item:nth-child(4) .info-value');
-            if (locationElement) {
-                locationElement.textContent = `California ${timeString}`;
-            }
-        }
+        // Navigation functionality for internal sections only
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
 
-        // Update time every second
-        setInterval(updateTime, 1000);
-        updateTime(); // Initial call
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
 
-        // Terminal window interactive effects removed since no header
-        
-        // Add subtle hover effects to experience items
-        document.querySelectorAll('.experience-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateX(5px)';
-                this.style.transition = 'transform 0.2s ease';
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateX(0)';
-            });
-        });
-
-        // Modal functionality
-        function openModal(projectId) {
-            document.getElementById(projectId).style.display = 'block';
-        }
-
-        function closeModal(projectId) {
-            document.getElementById(projectId).style.display = 'none';
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        // Dark mode toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️';
-        }
-
-        themeToggle.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
+            // Only apply JS page switching for hash links (e.g., #home, #blog)
+            if (href.startsWith('#')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(p => p.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    const pageId = this.getAttribute('href').substring(1);
+                    document.getElementById(pageId).classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
             }
         });
     </script>

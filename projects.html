@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #f5f3ed;
+            color: #2a2a2a;
+            line-height: 1.8;
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-flex .back-link {
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .header-flex .back-link:hover {
+            border-bottom-color: #555;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .back-link {
+            font-size: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            border-bottom-color: #555;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2a2a2a;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ccc;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .project {
+            margin-bottom: 35px;
+        }
+
+        .project h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .tech {
+            font-size: 0.95rem;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .project a {
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .project a:hover {
+            border-bottom-color: #2a2a2a;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 50px 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .section h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-flex">
+                <a href="index.html" class="back-link">← home</a>
+                <h1>Projects</h1>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>In Progress</h2>
+
+            <div class="project">
+                <h3>PaperFeed</h3>
+                <p class="tech">React Native • JavaScript • Databases • Real-Time Personalization</p>
+                <p class="description"> 
+                    Keeping this one under wraps for now.
+                </p>
+                <a target="_blank">GitHub Repository (Coming Soon!)</a>
+            </div>
+
+            <div class="project">
+                <h3>Home Workout AI Agent</h3>
+                <p class="tech">Python • Machine Learning • Computer Vision • LLMs</p>
+                <p class="description">
+                    An AI-powered fitness companion that combines MediaPipe pose estimation with large language models to analyze posture, detect exercise form errors, and provide personalized feedback in real time. 
+                    The system is being developed to function entirely offline, leveraging local inference with TensorFlow Lite and quantized model weights for performance on edge devices. Future versions will integrate voice feedback and adaptive training routines.
+                </p>
+                <a target="_blank">GitHub Repository (Coming Soon!)</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="section">
+            <h2>Completed</h2>
+
+            <div class="project">
+                <h3>Real-time Recommendation Engine</h3>
+                <p class="tech">Python • Node.js • Databases • Hybrid ML</p>
+                <p class="description">
+                    Built a hybrid recommendation system combining content-based and collaborative filtering with intelligent caching for sub-100ms latency. 
+                    Developed a modular API for real-time user preference updates and performance monitoring. 
+                    Optimized for scalability with asynchronous data pipelines and custom cache invalidation logic.
+                </p>
+                <a href="https://github.com/hrishid15/real-time-recommendation-engine" target="_blank">GitHub Repository</a>
+            </div>
+
+            <div class="project">
+                <h3>Trading Risk Engine</h3>
+                <p class="tech">Python • Risk Modeling • Finance • Monte Carlo Simulation</p>
+                <p class="description">
+                    A modular risk analysis framework designed to simulate and forecast portfolio exposure under multiple market stress scenarios.  
+                    Uses Monte Carlo methods and variance-covariance modeling to estimate Value at Risk (VaR) and Conditional VaR for diversified portfolios.  
+                    Includes support for multiple asset classes (equities, fixed income), scenario backtesting, and dynamic hedging suggestions.
+                </p>
+                <a href="https://github.com/hrishid15/trading-risk-engine" target="_blank">GitHub Repository</a>
+            </div>
+
+            <div class="project">
+                <h3>RISC-V Operating System</h3>
+                <p class="tech">C • RISC-V Assembly • GDB • QEMU</p>
+                <p class="description">
+                    A Unix-style operating system kernel built from scratch with ELF loading, page-based virtual memory, preemptive threading, and a minimal user-mode shell. 
+                    Implemented custom process management and a VirtIO block driver supporting concurrent reads and writes via interrupt-driven queues. 
+                    Features a writable file system with hierarchical directories, bitmap-based block allocation, and per-block dirty tracking for persistence.
+                </p>
+                <a href="https://github.com/hrishid15/risc-v-operating-system" target="_blank">GitHub Repository</a>
+            </div>
+
+            <div class="project">
+                <h3>Swaram</h3>
+                <p class="tech">Flutter • Dart • Firebase • iOS</p>
+                <p class="description">
+                    A cross-platform mobile app for Indian classical music notation, featuring custom keyboards and Firebase-backed real-time cloud sync. 
+                    Designed the UI and input flow for efficient notation entry, improving typing speed by 40% compared to conventional text input. 
+                    The app has over 100 downloads and 50+ active users across North America, Europe, and Asia.
+                </p>
+                <a href="https://apps.apple.com/us/app/swaram/id6639622213" target="_blank">App Store</a>
+            </div>
+
+            <div class="project">
+                <h3>Distributed Key-Value Store</h3>
+                <p class="tech">Python • REST APIs • Distributed Systems</p>
+                <p class="description">
+                    A distributed key-value database implementing consistent hashing and configurable replication across nodes. 
+                    Supports multiple consistency levels (one, quorum, all) and automatic fault recovery. 
+                    Includes a RESTful HTTP API and an interactive CLI for dynamic node management and testing.
+                </p>
+                <a href="https://github.com/hrishid15/distributed-key-value-store" target="_blank">GitHub Repository</a>
+            </div>
+
+            <div class="project">
+                <h3>Stock Market Prediction Bot</h3>
+                <p class="tech">Python • LSTM • Transformers (BERT) • NLP</p>
+                <p class="description">
+                    A machine learning bot that predicts stock trends by combining historical price data with real-time sentiment analysis. 
+                    Uses an LSTM model for temporal sequence learning and a fine-tuned BERT model for contextual news interpretation. 
+                    Integrated a data pipeline with BeautifulSoup and yFinance, achieving an 8.5% portfolio return in live personal trading over three months.
+                </p>
+                <a href="https://github.com/hrishid15/StockAnalysis" target="_blank">GitHub Repository</a>
+            </div>
+
+            <div class="project">
+                <h3>Pneumonia Detection Model</h3>
+                <p class="tech">Python • TensorFlow • CNNs • Medical Imaging</p>
+                <p class="description">
+                    Convolutional neural network for detecting pneumonia from chest X-rays using TensorFlow and transfer learning. 
+                    Trained on over 5,000 labeled images with augmentation, achieving >90% accuracy on validation data. 
+                    Implemented Grad-CAM visualization to highlight pathological regions for interpretability.
+                </p>
+                <a href="https://github.com/hrishid15/PneumoniaDetectionModel" target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

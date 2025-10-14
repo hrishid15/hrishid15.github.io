@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #f5f3ed;
+            color: #2a2a2a;
+            line-height: 1.8;
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-flex .back-link {
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .header-flex .back-link:hover {
+            border-bottom-color: #555;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            text-align: left;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .post {
+            margin-bottom: 50px;
+        }
+
+        .post h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            font-size: 0.95rem;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .post p {
+            font-size: 1.05rem;
+            color: #2a2a2a;
+            margin-bottom: 10px;
+        }
+
+        .post a {
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .post a:hover {
+            border-bottom-color: #2a2a2a;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 50px 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .post h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-flex">
+                <a href="index.html" class="back-link">← home</a>
+                <h1>Blog</h1>
+            </div>
+        </header>
+
+        <div class="intro">
+            <p>
+                I'm cooking up some fun mini-projects right now, so there should be posts coming soon (I hope)! 
+            </p>
+        </div>
+    </div>
+</body>
+</html>
