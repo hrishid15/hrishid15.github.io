@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>blog</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,14 +15,14 @@
 
         body {
             font-family: 'Crimson Text', serif;
-            background-color: #f5f3ed;
+            background-color: #ffffff;
             color: #2a2a2a;
             line-height: 1.8;
             padding: 60px 20px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -58,7 +59,7 @@
 
         .intro {
             max-width: 900px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 20px auto;
             text-align: left;
         }
 
@@ -70,6 +71,7 @@
 
         .post {
             margin-bottom: 50px;
+            position: relative;
         }
 
         .post h2 {
@@ -79,7 +81,7 @@
         }
 
         .post-date {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: #777;
             font-style: italic;
             margin-bottom: 15px;
@@ -98,8 +100,84 @@
             transition: border-color 0.3s ease;
         }
 
+        .post .post-date {
+            font-size: 1.05rem;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .post a {
+            color: #2a2a2a;
+            font-size: 1.05rem;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
         .post a:hover {
             border-bottom-color: #2a2a2a;
+        }
+
+        /* Featured post with aerodynamic visualization */
+        .featured-post {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .aero-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin: 15px 0;
+            background: transparent;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .canvas-label {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .featured-post h2 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+            color: #2a2a2a;
+            font-weight: 600;
+        }
+        
+        .featured-post p {
+            font-size: 1.15rem;
+            color: #2a2a2a;
+            margin-bottom: 10px;
+        }
+
+        .featured-post .post-date {
+            font-size: 1.05rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        .featured-post a {
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .featured-post a:hover {
+            border-bottom-color: #2a2a2a;
+        }
+
+        .featured-tag {
+            display: none;
         }
 
         hr {
@@ -121,6 +199,18 @@
             .post h2 {
                 font-size: 1.3rem;
             }
+
+            .featured-post {
+                padding: 0;
+            }
+
+            .featured-post h2 {
+                font-size: 1.3rem;
+            }
+
+            .aero-canvas-container {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -135,8 +225,26 @@
 
         <div class="intro">
             <p>
-                I'm cooking up some fun mini-projects right now, so there should be posts coming soon (I hope)! 
+                Exploring simulations, autonomous systems, and other things that make me confused or curious.
             </p>
+        </div>
+
+        <!-- Featured aerodynamics post -->
+        <div class="featured-post">
+            <h2>Chasing Digital Downforce</h2>
+            <p class="post-date">10.17.2025</p>
+            
+            <p>
+                A journey through computational fluid dynamics, pressure gradients, and the elegant math behind 
+                aerodynamic shapes, making the invisible visible through simulation.
+            </p>
+            <a href="blogs/blog1.html">read more →</a>
+        </div>
+
+        <!-- Placeholder for future posts -->
+        <div class="post">
+            <h2>More Posts Coming Soon</h2>
+            <p class="post-date">stay tuned</p>
         </div>
     </div>
 </body>
