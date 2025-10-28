@@ -31,8 +31,28 @@
 
         /* Header Section */
         header {
-            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 60px 0 0 0;
+            gap: 40px;
+        }
+
+        .header-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .header-image {
+            flex-shrink: 0;
+        }
+
+        .header-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e0e0e0;
         }
 
         h1 {
@@ -179,6 +199,20 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-text {
+                text-align: center;
+            }
+
+            .header-image img {
+                width: 150px;
+                height: 150px;
+            }
+
             h1 {
                 font-size: 2.8rem;
             }
@@ -210,8 +244,13 @@
 <body>
     <div class="container">
         <header>
-            <h1>Hrishikesh Deshpande</h1>
-            <p class="subtitle">Computer Engineering • University of Illinois Urbana-Champaign</p>
+            <div class="header-text">
+                <h1>Hrishikesh Deshpande</h1>
+                <p class="subtitle">Computer Engineering • University of Illinois Urbana-Champaign</p>
+            </div>
+            <div class="header-image">
+                <img src="assets/images/me.jpg" alt="Hrishikesh Deshpande">
+            </div>
         </header>
 
         <nav>
