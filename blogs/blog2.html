@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>understanding transformers</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Add KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #ffffff;
+            color: #2a2a2a;
+            line-height: 1.8;
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .header-flex .back-link {
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .header-flex .back-link:hover {
+            border-bottom-color: #555;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .post-date {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 25px 0 25px 0;
+            color: #2a2a2a;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 20px 0 20px 0;
+            color: #2a2a2a;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .equation {
+            background: #fff;
+            border-left: 3px solid #8b7355;
+            margin: 30px 0;
+            font-size: 1.4rem;
+            overflow-x: auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .katex {
+            font-size: 1.6em;
+        }
+
+        .content .katex {
+            font-size: 0.95em;
+        }
+
+        code {
+            background: #f0ece3;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .callout {
+            background: #fff9f0;
+            border-left: 4px solid #8b7355;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .architecture-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .architecture-box h3 {
+            margin-top: 0;
+            color: #2a2a2a;
+        }
+
+        .component-list {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .component-list li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .interactive-demo {
+            margin: 40px 0;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: transparent;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin: 15px 0 30px 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .canvas-label {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .control-panel {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .slider-container {
+            margin: 15px 0;
+        }
+
+        .slider-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #2a2a2a;
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #8b7355;
+            cursor: pointer;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #8b7355;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 600;
+            color: #8b7355;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .canvas-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-flex">
+                <a href="../blog.html" class="back-link">← back</a>
+                <h1>Understanding Transformers</h1>
+            </div>
+            <p class="post-date">November 11, 2025</p>
+        </header>
+
+        <div class="content">
+            <!-- Introduction -->
+            <p>
+                Over the past week and a half, I've been on a mission to actually understand how transformers work. 
+                My journey started with watching <a href="https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1" target="_blank" style="color: #2a2a2a; text-decoration: none; border-bottom: 1px solid #2a2a2a;">YouTube videos</a> 
+                to build up some intuition for the architecture. Once I felt ready, I dove into the original 
+                <a href="https://arxiv.org/abs/1706.03762" target="_blank" style="color: #2a2a2a; text-decoration: none; border-bottom: 1px solid #2a2a2a;">Attention is All You Need</a> 
+                paper, followed by both <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" style="color: #2a2a2a; text-decoration: none; border-bottom: 1px solid #2a2a2a;">The Illustrated Transformer</a> and 
+                <a href="https://nlp.seas.harvard.edu/annotated-transformer/" target="_blank" style="color: #2a2a2a; text-decoration: none; border-bottom: 1px solid #2a2a2a;">The Annotated Transformer</a> 
+                to really solidify my understanding. We use tools powered by transformers every single day, whether it's 
+                ChatGPT, Claude, or any modern language model, but most people don't actually know what's happening under the hood. I 
+                wanted to do a deeper dive into the architecture just for fun, to understand the technology that's shaping so much of 
+                what we do with AI today. Also, I will state that I am in no way an expert in machine learning or generative models 
+                and this is project is purely out of personal curiousity, so if you happen to find anything I can modify or fix, feel free to reach out!
+            </p>
+            
+            <p>
+                In order to understand transformers, we must first understand the basic neural networks that led to the creation of the 
+                transformer. Some of these networks include the Long Short Term Memory (LSTM) network and the Sequence-to-Sequence 
+                Encoder & Decoder networks. The transformer also draws heavy inspiration from standard Attention networks. So what 
+                do these inferior models have to do with the transformer?
+            </p>
+            
+            <p>
+                LSTMs showed us how to handle long-term dependencies in sequences, and seq2seq models demonstrated 
+                that we could use an encoder-decoder structure to transform one sequence into another. The problem was that 
+                they were super slow since they had to process everything sequentially, and they still struggled with really 
+                long sequences even with attention mechanisms added on.
+            </p>
+            
+            <p>
+                The transformer completely ditches the recurrence idea and goes all-in on attention. Instead of processing 
+                words one at a time like LSTMs, transformers look at all the words in a sequence simultaneously using 
+                self-attention. The architecture has two main parts: an encoder and a decoder, similar to seq2seq models 
+                but without any recurrence.
+            </p>
+
+            <!-- Interactive Demo -->
+            <div class="interactive-demo">
+                <h3>Interactive Attention Visualization</h3>
+                <p>Before we dive into the architecture, let's see how attention works. Move your mouse over the canvas below to see how different words might "attend" to each other in a sentence.</p>
+                <div class="canvas-container">
+                    <canvas id="attentionCanvas"></canvas>
+                    <span class="canvas-label">hover to see attention patterns</span>
+                </div>
+                <div class="control-panel">
+                    <div class="slider-container">
+                        <label>Attention Strength: <span class="slider-value" id="strengthValue">5</span></label>
+                        <input type="range" id="strengthSlider" min="1" max="10" value="5">
+                    </div>
+                    <div class="slider-container">
+                        <label>Number of Heads: <span class="slider-value" id="headsValue">4</span></label>
+                        <input type="range" id="headsSlider" min="1" max="8" value="4">
+                    </div>
+                </div>
+            </div>
+
+            <h2>The Building Blocks</h2>
+            
+            <h3>Word Embeddings</h3>
+            <p>
+                Word embeddings are basically a way to convert words into numerical vectors that neural networks can actually work with. Since models can't directly understand text, we need to represent words as numbers in a way that captures their meaning and relationships to other words.
+            </p>
+            
+            <p>
+                The simplest approach would be one-hot encoding, where each word is represented as a vector with a 1 in one position and 0s everywhere else. But this is pretty terrible because it doesn't capture any semantic meaning - the words "king" and "queen" would be just as different as "king" and "pizza" according to one-hot encoding.
+            </p>
+            
+            <p>
+                Word embeddings solve this by mapping words to dense vectors in a continuous space, where words with similar meanings end up close to each other. The cool thing about word embeddings is that they can capture semantic relationships. The classic example is that the vector arithmetic "king - man + woman ≈ queen" actually works in the embedding space.
+            </p>
+
+            <h3>Activation Functions: Sigmoid and Tanh</h3>
+            <p>Before we get into the architecture, we need to understand two key activation functions that play important roles in neural networks.</p>
+            
+            <div class="architecture-box">
+                <h3>Sigmoid Function</h3>
+                <p>The sigmoid activation function takes any input value and squashes it into a range between 0 and 1:</p>
+                <div class="equation">
+                    $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
+                </div>
+                <p>This 0-to-1 range makes it really useful for representing probabilities or percentages. In LSTMs, sigmoid is used specifically in the gates to determine what percentage of information should be kept, added, or passed through.</p>
+            </div>
+
+            <div class="architecture-box">
+                <h3>Tanh Function</h3>
+                <p>The tanh (hyperbolic tangent) activation function squashes inputs into a range between -1 and 1:</p>
+                <div class="equation">
+                    $$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
+                </div>
+                <p>The main advantage of tanh over sigmoid is that it's zero-centered, meaning its outputs are distributed around 0 instead of being all positive. This helps with training because it makes the gradients flow better during backpropagation.</p>
+            </div>
+
+            <h2>Long Short Term Memory (LSTM)</h2>
+            <p>
+                The Long Short Term Memory model is a type of recurrent neural network (RNN) that incorporates 2 different input paths for determining the output. These paths are defined as the Long Term Memory (LTM) path and the Short Term Memory (STM) path.
+            </p>
+            
+            <p>
+                The LSTM cell can be divided into 2 paths as well as 3 sequential units. One path is the LTM path, which has no inherent weights, biases or activation functions, as the point of this path is to avoid any major changes that could affect the model's understanding of the input in its long term memory. On the other hand, the STM path propagates sequentially through the units of the LSTM cells, maintaining the LSTM model's status as an RNN.
+            </p>
+
+            <div class="architecture-box">
+                <h3>The Three Gates</h3>
+                <ul class="component-list">
+                    <li><strong>Forget Gate:</strong> This is the first unit, responsible for initially modifying the LTM with the new current input. By applying basic mathematical operations and a sigmoid function to the current STM, this unit determines the percentage of the LTM that the model should continue to remember.</li>
+                    <li><strong>Input Gate:</strong> This unit updates the LTM by combining it with a generated potential LTM. First it uses the current STM value to generate a potential LTM value using the tanh function. Then it uses a sigmoid function to determine what percentage of the potential LTM should be added to the current LTM.</li>
+                    <li><strong>Output Gate:</strong> This uses the STM and the LTM to determine the output for this cell. It generates a potential STM value using tanh on the current LTM, then applies a sigmoid function to the current STM to determine what percentage to retain. The unit outputs that percentage multiplied by the potential STM value.</li>
+                </ul>
+            </div>
+
+            <p>As a quick note, when training the LSTM network, back propagation is done on the unrolled LSTM network, updating the weights and biases of each LSTM cell individually.</p>
+
+            <h2>Sequence-to-Sequence Models</h2>
+            <p>
+                Sequence-to-sequence encoder & decoder models build on the standard LSTM models by incorporating them into separate components: an encoder that takes inputs, and a decoder that generates outputs based on a given input.
+            </p>
+            
+            <p>
+                On the encoder side, a word embedding network as well as a tensor of LSTM cells is used to encode a tokenized input into a collection of LTM and STM values. The final output of this LSTM tensor is called the context vector.
+            </p>
+            
+            <p>
+                On the decoder side, the LSTM tensor's LTM and STM values are initialized with the context vector values, and the first input passed to the model is a special token (either EOS or SOS). This token indicates to the decoder that it can begin predicting and generating the first output token. The output is determined using a softmax function, which converts all the outputs into a probability distribution to select the most probabilistically likely output.
+            </p>
+
+            <div class="architecture-box">
+                <h3>Softmax Function</h3>
+                <p>The softmax function takes in a vector of numbers and converts them into a probability distribution:</p>
+                <div class="equation">
+                    $$\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{n} e^{x_j}}$$
+                </div>
+                <p>This ensures that all the output values are between 0 and 1, and they all sum up to exactly 1 - which is perfect for representing probabilities. For example, if you have a classification task with three classes and your network outputs [2.0, 1.0, 0.1], softmax might convert this to something like [0.659, 0.242, 0.099].</p>
+            </div>
+
+            <p>
+                The decoder continues to generate and predict tokens for the output until the output is an EOS or other special ending token, concluding the generated output. Training for this model follows the same back propagation tactic as the LSTM models, though teacher forcing is employed during training by feeding the actual target sequence as input at each time step rather than the model's own predictions.
+            </p>
+
+            <div class="callout">
+                <div class="callout-title">The Problem</div>
+                <p style="margin: 0;">
+                    Even though seq2seq models utilize Long Short Term Memory, they begin to lose memory after a couple iterations into the recurrence process, which leaves the model forgetting some of the earlier context that was provided. This is where attention comes in.
+                </p>
+            </div>
+
+            <h2>Attention Mechanism</h2>
+            <p>
+                Attention connects each word in a phrase to every other word in that phrase, calculating a sort of similarity of focus score for each connection. These scores determine how much effect certain words have on one another. Upon determining the scores (one way is through cosine similarity), they are normalized so that they can be passed through a softmax function, which gives each word a weight on a scale from 0 to 1.
+            </p>
+            
+            <p>
+                In seq2seq models, for example, there is a path from each LSTM layer's output vector in the encoder to the attention unit, which carries out the attention process on all of the output vectors of the encoder to determine the next output.
+            </p>
+            
+            <p>
+                The self-attention and attention units in the transformer have 3 different inputs: queries, keys, and values. The attention process works by calculating a similarity score between the query vector and the key vector for the current word. Then the scores are normalized and passed through the softmax function to obtain a percentage of how much each word impacts the current word. This percentage is then multiplied by the value vector and summed to produce an output at the current position.
+            </p>
+
+            <h2>The Transformer Architecture</h2>
+            <p>Now we get to the good stuff. The transformer takes everything we've learned from LSTMs, seq2seq, and attention, then throws away the sequential processing to create something much more powerful.</p>
+
+            <h3>The Encoder</h3>
+            <p>
+                The encoder takes in the input sequence and processes it through multiple identical layers. Each layer has two main components: a multi-head self-attention mechanism and a feed-forward neural network.
+            </p>
+            
+            <p>
+                The self-attention part lets each word look at every other word in the sequence to figure out which ones are most relevant for understanding its meaning. Multi-head attention is basically running multiple attention mechanisms in parallel, each one learning to focus on different types of relationships between words. After the attention step, the output goes through a simple feed-forward network that's applied to each position independently.
+            </p>
+
+            <h3>The Decoder</h3>
+            <p>
+                The decoder works similarly but has three components per layer instead of two. It has a masked self-attention layer (masked so it can't look at future words when generating output), a cross-attention layer that attends to the encoder's output, and a feed-forward network. This setup lets the decoder generate output tokens one at a time while still being able to look at the full encoded input.
+            </p>
+
+            <h3>Positional Encoding</h3>
+            <p>
+                One crucial thing transformers added is positional encoding. Since transformers don't process sequences in order like RNNs do, they need a way to know where each word is in the sequence. Positional encodings are added to the word embeddings to give the model this position information.
+            </p>
+
+            <div class="callout">
+                <div class="callout-title">The Key Innovation</div>
+                <p style="margin: 0;">
+                    The whole architecture is also full of residual connections and layer normalization, which help with training stability and let the model stack many layers deep without running into gradient problems. This is part of what lets transformers scale so well compared to earlier architectures.
+                </p>
+            </div>
+
+            <h2>Why Transformers Won</h2>
+            <p>
+                The transformer architecture took the radical step of asking: if attention is so powerful, why do we need 
+                the recurrence at all? By relying entirely on attention mechanisms, specifically self-attention where 
+                sequences attend to themselves, transformers eliminated the sequential processing bottleneck of RNNs.
+            </p>
+            
+            <p>
+                This parallelization, combined with multi-head attention that captures different types of relationships 
+                simultaneously, enabled transformers to scale to much larger datasets and longer sequences than their 
+                predecessors. Instead of being limited by sequential processing like LSTMs, transformers can look at 
+                all positions at once, making training way faster and allowing the model to capture long-range dependencies 
+                more effectively.
+            </p>
+
+            <p>
+                The result was a model that inherited the memory management concepts from LSTMs, the encoder-decoder 
+                structure from seq2seq, and the focus mechanism from attention, while discarding the recurrent 
+                limitations that held them back. Today, transformers power pretty much every major language model 
+                you've heard of such as GPT, BERT, and Claude.
+            </p>
+        </div>
+    </div>
+
+    <!-- Load KaTeX JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <script>
+        // Render all math after page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+
+    <script>
+        // Interactive Attention Visualization
+        const canvas = document.getElementById('attentionCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const words = ['The', 'cat', 'sat', 'on', 'the', 'mat'];
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+        let attentionStrength = 5;
+        let numHeads = 4;
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        document.getElementById('strengthSlider').addEventListener('input', (e) => {
+            attentionStrength = parseInt(e.target.value);
+            document.getElementById('strengthValue').textContent = attentionStrength;
+        });
+
+        document.getElementById('headsSlider').addEventListener('input', (e) => {
+            numHeads = parseInt(e.target.value);
+            document.getElementById('headsValue').textContent = numHeads;
+        });
+
+        function getWordPositions() {
+            const positions = [];
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) * 0.35;
+            
+            for (let i = 0; i < words.length; i++) {
+                const angle = (i / words.length) * Math.PI * 2 - Math.PI / 2; // Start from top
+                positions.push({
+                    x: centerX + radius * Math.cos(angle),
+                    y: centerY + radius * Math.sin(angle),
+                    word: words[i]
+                });
+            }
+            return positions;
+        }
+
+        function drawAttention() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const positions = getWordPositions();
+            
+            // Find closest word to mouse
+            let closestIdx = 0;
+            let minDist = Infinity;
+            positions.forEach((pos, idx) => {
+                const dist = Math.hypot(pos.x - mouseX, pos.y - mouseY);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestIdx = idx;
+                }
+            });
+
+            // Draw attention connections (edges) first
+            const queryPos = positions[closestIdx];
+            positions.forEach((keyPos, idx) => {
+                if (idx === closestIdx) return;
+                
+                const distance = Math.abs(idx - closestIdx);
+                const attention = Math.exp(-distance / attentionStrength);
+                
+                // Draw multiple heads with different shades of brown
+                const headColors = [
+                    'rgba(139, 115, 85, ',
+                    'rgba(160, 130, 95, ',
+                    'rgba(120, 100, 70, ',
+                    'rgba(180, 150, 110, ',
+                    'rgba(100, 85, 60, ',
+                    'rgba(190, 160, 120, ',
+                    'rgba(110, 90, 65, ',
+                    'rgba(200, 170, 130, '
+                ];
+
+                for (let h = 0; h < numHeads; h++) {
+                    ctx.beginPath();
+                    ctx.moveTo(queryPos.x, queryPos.y);
+                    ctx.lineTo(keyPos.x, keyPos.y);
+                    ctx.strokeStyle = headColors[h] + (attention * 0.6) + ')';
+                    ctx.lineWidth = attention * 5;
+                    ctx.stroke();
+                }
+                
+                // Draw attention weight label on the edge
+                const midX = (queryPos.x + keyPos.x) / 2;
+                const midY = (queryPos.y + keyPos.y) / 2;
+                const weight = attention.toFixed(2);
+                
+                // Draw background for label
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fillRect(midX - 15, midY - 8, 30, 16);
+                
+                // Draw label text
+                ctx.fillStyle = '#8b7355';
+                ctx.font = 'bold 11px Crimson Text';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(weight, midX, midY);
+            });
+
+            // Draw word nodes on top
+            positions.forEach((pos, idx) => {
+                const isQuery = idx === closestIdx;
+                
+                // Draw circle
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, isQuery ? 40 : 30, 0, Math.PI * 2);
+                ctx.fillStyle = isQuery ? '#8b7355' : '#fff';
+                ctx.fill();
+                ctx.strokeStyle = '#8b7355';
+                ctx.lineWidth = isQuery ? 3 : 2;
+                ctx.stroke();
+
+                // Draw text
+                ctx.fillStyle = isQuery ? '#fff' : '#2a2a2a';
+                ctx.font = isQuery ? 'bold 16px Crimson Text' : '14px Crimson Text';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(pos.word, pos.x, pos.y);
+            });
+
+            // Draw legend
+            ctx.fillStyle = '#999';
+            ctx.font = '14px Crimson Text';
+            ctx.textAlign = 'left';
+            ctx.fillText('Hover over words to see attention weights', 10, 25);
+        }
+
+        function animate() {
+            drawAttention();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
